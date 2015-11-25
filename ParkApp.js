@@ -1,11 +1,12 @@
 var express = require('express');
+var path = require('path');
 
 var app = express();
 
 app.set('port', 3000);
 
 app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname+'/Form.html'));
+  res.sendFile(path.join(__dirname, 'Form.html'));
 });
 
 app.use(function(req,res){
