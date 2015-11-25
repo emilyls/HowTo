@@ -7,7 +7,7 @@ function bindButton() {
 		request.onreadystatechange = function() {
 			if (request.readyState == 4 && request.status == 200) {
 				var response = JSON.parse(request.responseText);
-				document.getElementById('allParks').innerHTML = response;
+				document.getElementById('allParks').innerHTML = response
 			}
 		}
 

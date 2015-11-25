@@ -7,6 +7,25 @@ app.set('port', 3000);
 
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, 'Form.html'));
+
+// if(req.body['All Parks']){
+    var url = 'http://oregonstateparks.org/data/index.cfm/parks';
+    var options = {
+      host: 'oregonstateparks.org',
+      path: '/data/index.cfm/parks'
+    };
+    callback = function(response) {
+      var str = '';
+      response.on('data', function (chunk) {
+        str += chunk;
+      });
+      response.on('end', function() {
+        var data = JSON.parse(JSON.stringify(str));
+        context.data = data;
+      });
+    }
+    http.request(options,callback).end();
+  // }
 });
 
 app.use(function(req,res){
