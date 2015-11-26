@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="ParkData.js"></script>
+	</head>
+	<body>
+		<!-- All Park Data -->
+		<form>
+			<fieldset>
+				<legend>All Park Data</legend>
+				<input type="submit" id="allParkData" value="Get All Park Data">
+			</fieldset>
+		</form>
+		<!-- Park Photos -->
+		<form>
+			<fieldset>
+				<legend>Park Photos</legend>
+        		<label for="photos_Id">Park ID:</label>
+        		<input type="number" name="photos_Id" id="photos_Id">
+        	</br>
+        		<input type="submit" id="photos" value="Get Photos">
+        	</fieldset>
+    	</form>
+		<!-- Park Features -->
+		<form>
+			<fieldset>
+		        <legend>Park Features</legend>
+		        <label for="features_Id">Park ID:</label>
+		        <input type="number" name="features_Id" id="features_Id">
+		        <p>or</p>
+		        <label for="features_Name">Park Name:</label>
+		        <input type="text" name="features_Name" id="features_Name">
+		        <p>or</p>
+		        <label for="features_Titles">Icon Titles:</label>
+		        <input type="text" name="features_Titles" id="features_Titles">
+		        <p>or</p>
+		        <label for="features_Class">Icon Class:</label>
+		        <input type="text" name="features_Class" id="features_Class">
+		    </br>
+		        <input type="submit" id="features" value="Get Features">
+		    </fieldset>
+		</form>
+		<!-- Events -->
+		<form>
+			<fieldset>
+		        <legend>Park Events</legend>
+		        <label for="event_Id">Park ID:</label>
+		        <input type="number" name="event_Id" id="event_Id">
+		        <p>or</p>
+		        <label for="event_Category">Category ID:</label>
+		        <input type="number" name="event_Category" id="event_Category">
+		        <p>or</p>
+		        <label for="event_Description">Description:</label>
+		        <input type="text" name="event_Description" id="event_Description">
+		        <p>or</p>
+		        <label for="event_DateFrom">Date From:</label>
+		        <input type="date" name="event_DateFrom" id="event_DateFrom">
+		        <p>or</p>
+		        <label for="event_DateTo">Date To:</label>
+		        <input type="date" name="event_DateTo" id="event_DateTo">
+		        <p>or</p>
+		        <label for="event_EventId">Event ID:</label>
+		        <input type="number" name="event_EventId" id="event_EventId">
+		    </br>
+		        <input type="submit" id="event" value="Get Events">
+		    </fieldset>
+		</form>
+		<!-- Features -->
+		<form>
+			<fieldset>
+				<legend>All Park Features</legend>
+				<input type="submit" id="allFeatures" value="Get Possible Features">
+			</fieldset>
+		</form>
+		<section id="results">
+			<p id="allParks"></p>
+		</section>
+	</body>
+</html>
