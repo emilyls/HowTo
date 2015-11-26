@@ -1,0 +1,17 @@
+<h3>Park Features</h3>
+<p>
+	Name: {{this.name}}
+	</br>
+	Id: {{this.id}}
+	</br>
+	Latitude: {{this.latitude}}
+	</br>
+	Longitude: {{this.longitude}}
+	</br>
+	ADA: {{this.ada}}
+</p>
+<ul>
+{{#each data}}
+	<li>{{this.class}}: {{this.title}}
+{{/each}}
+</ul>
