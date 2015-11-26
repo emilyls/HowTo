@@ -26,20 +26,22 @@ app.get('/results*', function(req, res) {
         str += chunk;
       });
       response.on('end', function() {
-        var data = JSON.parse(JSON.stringify(str));
+        var data = JSON.parse(str);
+        
         var context = [];
         for (var i = 0; i < data.length; i++) {
           var park = data[i];
           context.push(park);
-          for (var i = 0; i < context.lenght; i++) {
-            console.log(context[i]);
-          }
         }
+        for (var i = 0; i < context.length; i++) {
+            console.log(context[i]);
+        }
+	//console.log(data);
+        res.render('Results');
       });
     }
     http.request(options,callback).end();
   // }
-  res.render('Results');
 });
 
 app.get('/home', function(req, res) {
