@@ -98,7 +98,6 @@ app.post('/ParkFeatures', function(req, res) {
     string += 'iconClasses=';
     string += encodeURI(req.body.features_Classes);
   }
-console.log(string);
   var url = 'http://oregonstateparks.org/data/index.cfm/parkFeatures';
   var options = {
     host: 'oregonstateparks.org',
@@ -136,6 +135,30 @@ console.log(string);
   http.request(options,callback).end();
 });
 
+app.get('/AllFeatures', function(req, res) {
+  var url = 'http://oregonstateparks.org/data/index.cfm/features';
+  var options = {
+    host: 'oregonstateparks.org',
+    path: '/data/index.cfm/features'
+  };
+  callback = function(response) {
+    var str = '';
+    response.on('data', function (chunk) {
+      str += chunk;
+    });
+    response.on('end', function() {
+      var data = JSON.parse(str);
+      var features = [];
+      for (var i = 0; i < data.length; i++) {
+        features.push({'class':data[i].featureClass, 'title': data[i].featureTitle});
+      }
+      var context = {};
+      context.data = features;
+      res.render('AllFeatures', context);
+    });
+  }
+  http.request(options,callback).end();
+});
 
 app.use(function(req,res){
   res.type('text/plain');
