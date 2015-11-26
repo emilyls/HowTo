@@ -14,31 +14,29 @@ app.set('view engine', 'handlebars');
 app.set('port', 3000);
 
 app.get('/AllParkData', function(req, res) {
-  // if(req.body['All Parks']){
-    var url = 'http://oregonstateparks.org/data/index.cfm/parks';
-    var options = {
-      host: 'oregonstateparks.org',
-      path: '/data/index.cfm/parks'
-    };
-    callback = function(response) {
-      var str = '';
-      response.on('data', function (chunk) {
-        str += chunk;
-      });
-      response.on('end', function() {
-        var data = JSON.parse(str);
-        
-        //var context = [];
-        for (var i = 0; i < data.length; i++) {
-          //var park = JSON.parse(data[i]);
-          console.log(data[i].park_name);
+		var url = 'http://oregonstateparks.org/data/index.cfm/parks';
+		var options = {
+host: 'oregonstateparks.org',
+path: '/data/index.cfm/parks'
+};
+callback = function(response) {
+var str = '';
+response.on('data', function (chunk) {
+	str += chunk;
+	});
+response.on('end', function() {
+	var data = JSON.parse(str);
+
+	var parks = [];
+	for (var i = 0; i < data.length; i++) {
+	  parks.push({'name':data[i].park_name, 'id': data[i].park_id});
         }
-	//console.log(data);
-        res.render('AllParkData', data);
+        var context = {};
+	context.data = parks;
+        res.render('AllParkData', context);
       });
     }
     http.request(options,callback).end();
-  // }
 });
 
 app.get('/home', function(req, res) {
