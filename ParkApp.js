@@ -13,7 +13,7 @@ app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 app.set('port', 3000);
 
-app.get('/results*', function(req, res) {
+app.get('/AllParkData', function(req, res) {
   // if(req.body['All Parks']){
     var url = 'http://oregonstateparks.org/data/index.cfm/parks';
     var options = {
@@ -34,7 +34,7 @@ app.get('/results*', function(req, res) {
           console.log(data[i].park_name);
         }
 	//console.log(data);
-        res.render('Results', data);
+        res.render('AllParkData', data);
       });
     }
     http.request(options,callback).end();
