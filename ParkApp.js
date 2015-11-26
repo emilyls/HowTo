@@ -72,11 +72,36 @@ app.post('/ParkPhotos', function(req, res) {
 });
 
 app.post('/ParkFeatures', function(req, res) {
-  
-  var url = 'http://oregonstateparks.org/data/index.cfm/parkPhotos';
+  var string = ""; 
+  if (req.body.features_Id > 0) {
+    string += 'parkId=';
+    string += req.body.features_Id;
+  }
+  if (req.body.featurs_Name) {
+    if (string != "") {
+      string += '&';
+    }
+    string += 'parkName=';
+    string += req.body.features_Name;
+  }
+  if (req.body.features_Titles) {
+    if (string != "") {
+      string += '&';
+    }
+    string += 'iconTitles=';
+    string += req.body.features_Titles;
+  }
+  if (req.body.features_Class) {
+    if (string != "") {
+      string += '&';
+    }
+    string += 'iconClasses=';
+    string += req.body.features_Classes;
+  }
+  var url = 'http://oregonstateparks.org/data/index.cfm/parkFeatures';
   var options = {
     host: 'oregonstateparks.org',
-    path: '/data/index.cfm/parkPhotos?parkId=' + req.body.features_Id + '&parkName=' + req.body.features_Name + '&iconTitles=' + features_Titles + '&iconClasses=' + features_Class 
+    path: '/data/index.cfm/parkFeatures?' + string 
   };
   callback = function(response) {
     var str = '';
@@ -85,18 +110,27 @@ app.post('/ParkFeatures', function(req, res) {
     });
     response.on('end', function() {
       var data = JSON.parse(str);
-      var features = [];
-      for (var i = 0; i < data.length; i++) {
-        features.push({'class': data[i].featureClass, 'title': featureTitle);
-      }
       var context = {};
-      context.data = features;
-      context.latitude = data[0].park_latitude;
-      context.longitude = data[0].park_longitude;
-      context.name = data[0].park_name;
-      context.id = data[0].park_id;
-      context.ada = data[0].ada;
-      res.render('ParkPhotos', context);
+      var parks = [];
+      for (var i = 0; i < data.length; i++) {
+	var park = {};
+        var features = [];
+        park.latitude = data[i].park_latitude;
+        park.longitude = data[i].park_longitude;
+        park.name = data[i].park_name;
+        park.id = data[i].park_id;
+        park.ada = data[i].ada;
+        features.push({'class': data[i].featureClass, 'title': data[i].featureTitle});
+        while (i < data.length - 1 && data[i+1].park_id == data[i].park_id) {
+          features.push({'class': data[i+1].featureClass, 'title': data[i+1].featureTitle});
+          console.log(features);
+          i++;
+        }
+        park.features = features;
+        parks.push({'park': park});	
+      }
+      context.ParkList = parks;
+      res.render('ParkFeatures', context);
     });
   }
   http.request(options,callback).end();
