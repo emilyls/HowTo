@@ -152,14 +152,14 @@ app.post('/Events', function(req, res) {
     string += 'descr=';
     string += req.body.event_Description;
   }
-  if (req.body.event_DateFrom > 0) {
+  if (req.body.event_DateFrom) {
     if (string != "") {
       string += '&';
     }
     string += 'dateFrom=';
     string += req.body.event_DateFrom;
   }
-  if (req.body.event_DateTo > 0) {
+  if (req.body.event_DateTo) {
     if (string != "") {
       string += '&';
     }
@@ -173,6 +173,7 @@ app.post('/Events', function(req, res) {
     string += 'eventId=';
     string += req.body.event_EventId;
   }
+console.log(string);
   var url = 'http://oregonstateparks.org/data/index.cfm/parkEvents';
   var options = {
     host: 'oregonstateparks.org',
