@@ -77,27 +77,28 @@ app.post('/ParkFeatures', function(req, res) {
     string += 'parkId=';
     string += req.body.features_Id;
   }
-  if (req.body.featurs_Name) {
+  if (req.body.features_Name) {
     if (string != "") {
       string += '&';
     }
     string += 'parkName=';
-    string += req.body.features_Name;
+    string += encodeURI(req.body.features_Name);
   }
   if (req.body.features_Titles) {
     if (string != "") {
       string += '&';
     }
     string += 'iconTitles=';
-    string += req.body.features_Titles;
+    string += encodeURI(req.body.features_Titles);
   }
   if (req.body.features_Class) {
     if (string != "") {
       string += '&';
     }
     string += 'iconClasses=';
-    string += req.body.features_Classes;
+    string += encodeURI(req.body.features_Classes);
   }
+console.log(string);
   var url = 'http://oregonstateparks.org/data/index.cfm/parkFeatures';
   var options = {
     host: 'oregonstateparks.org',
@@ -123,7 +124,6 @@ app.post('/ParkFeatures', function(req, res) {
         features.push({'class': data[i].featureClass, 'title': data[i].featureTitle});
         while (i < data.length - 1 && data[i+1].park_id == data[i].park_id) {
           features.push({'class': data[i+1].featureClass, 'title': data[i+1].featureTitle});
-          console.log(features);
           i++;
         }
         park.features = features;
