@@ -43,7 +43,7 @@ app.post('/ParkPhotos', function(req, res) {
   var url = 'http://oregonstateparks.org/data/index.cfm/parkPhotos';
   var options = {
     host: 'oregonstateparks.org',
-    path: '/data/index.cfm/parkPhotos?parkId=' + request.body.photos_Id 
+    path: '/data/index.cfm/parkPhotos?parkId=' + req.body.photos_Id 
   };
   callback = function(response) {
     var str = '';
@@ -54,11 +54,14 @@ app.post('/ParkPhotos', function(req, res) {
       var data = JSON.parse(str);
       var photos = [];
       for (var i = 0; i < data.length; i++) {
-        photos.push({'thumb':data[i].thumbFile, 'image': data[i].imageFile});
+	var thumbnail = data[i].thumbFile.replace(/ /g,'%20');
+        var image = encodeURI(data[i].imageFile);
+        photos.push({'thumb': thumbnail, 'image': image});
+        //console.log(photos.thumb);
       }
       var context = {};
       context.data = photos;
-      context.id = request.body.photos_Id;
+      context.id = req.body.photos_Id;
       res.render('ParkPhotos', context);
     });
   }
