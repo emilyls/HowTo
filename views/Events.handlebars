@@ -1,0 +1,12 @@
+<h3>Events</h3>
+  {{#each data}}
+  <p>{{this.title}}: {{this.event_id}}</p>
+	<ul>
+	  <li>{{this.park_name}}: {{this.id}}
+	  <li>{{this.category}}
+	  <li>{{this.being}} - {{this.end}}
+	  <li>Location: {{this.location}}
+	  <li>All Day: {{this.all_day}}
+	</ul>
+  <p>{{this.description}}</p>
+  {{/each}}

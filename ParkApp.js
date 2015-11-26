@@ -135,6 +135,79 @@ app.post('/ParkFeatures', function(req, res) {
   http.request(options,callback).end();
 });
 
+app.post('/Events', function(req, res) {
+  var string = ""; 
+  if (req.body.event_Id > 0) {
+    string += 'parkId=';
+    string += req.body.event_Id;
+  }
+  if (req.body.event_Category > 0) {
+    string += 'categoryId=';
+    string += req.body.event_Category;
+  }
+  if (req.body.event_Description) {
+    if (string != "") {
+      string += '&';
+    }
+    string += 'descr=';
+    string += req.body.event_Description;
+  }
+  if (req.body.event_DateFrom > 0) {
+    if (string != "") {
+      string += '&';
+    }
+    string += 'dateFrom=';
+    string += req.body.event_DateFrom;
+  }
+  if (req.body.event_DateTo > 0) {
+    if (string != "") {
+      string += '&';
+    }
+    string += 'dateTo=';
+    string += req.body.event_DateTo;
+  }
+  if (req.body.event_EventId > 0) {
+    if (string != "") {
+      string += '&';
+    }
+    string += 'eventId=';
+    string += req.body.event_EventId;
+  }
+  var url = 'http://oregonstateparks.org/data/index.cfm/parkEvents';
+  var options = {
+    host: 'oregonstateparks.org',
+    path: '/data/index.cfm/parkEvents?' + string 
+  };
+  callback = function(response) {
+    var str = '';
+    response.on('data', function (chunk) {
+      str += chunk;
+    });
+    response.on('end', function() {
+      var data = JSON.parse(str);
+      var context = {};
+      var eventList = [];
+      for (var i = 0; i < data.length; i++) {
+        var eventData = {};
+        eventData.description = data[i].event_description;
+        eventData.event_id = data[i].park_event_id;
+        eventData.park_name = data[i].park_name;
+        eventData.id = data[i].park_id;
+        eventData.begin = data[i].event_start;
+        eventData.end = data[i].event_end;
+        eventData.location = data[i].event_location;
+        eventData.all_day = data[i].allDay;
+        eventData.category = data[i].park_event_category_desr;
+        eventData.title = data[i].title;
+        eventList.push(eventData);
+      }
+      context.data = eventList;
+      res.render('Events', context);
+    });
+  }
+  http.request(options,callback).end();
+});
+
 app.get('/AllFeatures', function(req, res) {
   var url = 'http://oregonstateparks.org/data/index.cfm/features';
   var options = {
