@@ -1,4 +1,5 @@
 var express = require('express');
+var http = require('http');
 
 var app = express();
 var handlebars = require('express-handlebars').create({defaultLayout: 'main'});
@@ -9,9 +10,10 @@ app.use(bodyParser.json());
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
-app.set('port', 5000);
+app.set('port', 3000);
 
 app.get('/', function(req, res) {
+  res.render('Form');
 // if(req.body['All Parks']){
     var url = 'http://oregonstateparks.org/data/index.cfm/parks';
     var options = {
@@ -25,7 +27,8 @@ app.get('/', function(req, res) {
       });
       response.on('end', function() {
         var data = JSON.parse(JSON.stringify(str));
-        context.data = data;
+//        context.data = data;
+	console.log(data);
       });
     }
     http.request(options,callback).end();
