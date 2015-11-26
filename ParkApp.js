@@ -12,9 +12,12 @@ app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 app.set('port', 3000);
 
-app.get('/', function(req, res) {
+app.get('/home', function(req, res) {
   res.render('Form');
-// if(req.body['All Parks']){
+});
+
+app.get('/', function(req, res) {
+  // if(req.body['All Parks']){
     var url = 'http://oregonstateparks.org/data/index.cfm/parks';
     var options = {
       host: 'oregonstateparks.org',
@@ -28,7 +31,7 @@ app.get('/', function(req, res) {
       response.on('end', function() {
         var data = JSON.parse(JSON.stringify(str));
 //        context.data = data;
-	console.log(data);
+  console.log(data);
       });
     }
     http.request(options,callback).end();
