@@ -14,29 +14,55 @@ app.set('view engine', 'handlebars');
 app.set('port', 3000);
 
 app.get('/AllParkData', function(req, res) {
-		var url = 'http://oregonstateparks.org/data/index.cfm/parks';
-		var options = {
-host: 'oregonstateparks.org',
-path: '/data/index.cfm/parks'
-};
-callback = function(response) {
-var str = '';
-response.on('data', function (chunk) {
-	str += chunk;
-	});
-response.on('end', function() {
-	var data = JSON.parse(str);
+	var url = 'http://oregonstateparks.org/data/index.cfm/parks';
+	var options = {
+    host: 'oregonstateparks.org',
+    path: '/data/index.cfm/parks'
+  };
+  callback = function(response) {
+    var str = '';
+    response.on('data', function (chunk) {
+    	str += chunk;
+    });
+    response.on('end', function() {
+      var data = JSON.parse(str);
+      var parks = [];
+      for (var i = 0; i < data.length; i++) {
+        parks.push({'name':data[i].park_name, 'id': data[i].park_id});
+      }
+      var context = {};
+      context.data = parks;
+      res.render('AllParkData', context);
+    });
+  }
+  http.request(options,callback).end();
+});
 
-	var parks = [];
-	for (var i = 0; i < data.length; i++) {
-	  parks.push({'name':data[i].park_name, 'id': data[i].park_id});
-        }
-        var context = {};
-	context.data = parks;
-        res.render('AllParkData', context);
-      });
-    }
-    http.request(options,callback).end();
+app.post('/ParkPhotos', function(req, res) {
+  
+  var url = 'http://oregonstateparks.org/data/index.cfm/parkPhotos';
+  var options = {
+    host: 'oregonstateparks.org',
+    path: '/data/index.cfm/parkPhotos?parkId=' + request.body.photos_Id 
+  };
+  callback = function(response) {
+    var str = '';
+    response.on('data', function (chunk) {
+      str += chunk;
+    });
+    response.on('end', function() {
+      var data = JSON.parse(str);
+      var photos = [];
+      for (var i = 0; i < data.length; i++) {
+        photos.push({'thumb':data[i].thumbFile, 'image': data[i].imageFile});
+      }
+      var context = {};
+      context.data = photos;
+      context.id = request.body.photos_Id;
+      res.render('ParkPhotos', context);
+    });
+  }
+  http.request(options,callback).end();
 });
 
 app.get('/home', function(req, res) {
