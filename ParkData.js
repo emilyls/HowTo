@@ -11,7 +11,7 @@ function bindButton() {
 			}
 		}
 
-		request.open('Get', 'http://oregonstateparks.org/data/index.cfm/parks', true);
+		request.open('Get', 'http://52.88.123.171:3000/results?AllParkData=true', true);
 		request.send(null);
 		event.preventDefault();
 	});

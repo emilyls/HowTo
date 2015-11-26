@@ -16,7 +16,7 @@ app.get('/home', function(req, res) {
   res.render('Form');
 });
 
-app.get('/', function(req, res) {
+app.get('/results?', function(req, res) {
   // if(req.body['All Parks']){
     var url = 'http://oregonstateparks.org/data/index.cfm/parks';
     var options = {
