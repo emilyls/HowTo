@@ -17,32 +17,32 @@ app.get('/home', function(req, res) {
   res.render('Form');
 });
 
-app.get('/results?', function(req, res) {
+app.get('/results', function(req, res) {
   // if(req.body['All Parks']){
     var url = 'http://oregonstateparks.org/data/index.cfm/parks';
-    var context = [];
     var options = {
       host: 'oregonstateparks.org',
       path: '/data/index.cfm/parks'
     };
-    callback = function(response, context) {
+    callback = function(response) {
       var str = '';
       response.on('data', function (chunk) {
         str += chunk;
       });
-      response.on('end', function(context) {
+      response.on('end', function() {
         var data = JSON.parse(JSON.stringify(str));
+        var context = [];
         for (var i = 0; i < data.length; i++) {
           var park = data[i];
           context.push(park);
+          for (var i = 0; i < context.lenght; i++) {
+            console.log(context[i]);
+          }
         }
       });
     }
     http.request(options,callback).end();
   // }
-          for (var i = 0; i < context.lenght; i++) {
-          console.log(context[i]);
-        }
   res.render('Results');
 });
 

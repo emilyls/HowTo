@@ -11,7 +11,7 @@ function bindButton() {
 			}
 		}
 
-		request.open('Get', 'http://52.88.123.171:3000/results?AllParkData=true', true);
+		request.open('Get', 'http://52.88.123.171:3000/results', true);
 		request.send(null);
 		event.preventDefault();
 	});
