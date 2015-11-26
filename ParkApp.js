@@ -28,16 +28,13 @@ app.get('/results*', function(req, res) {
       response.on('end', function() {
         var data = JSON.parse(str);
         
-        var context = [];
+        //var context = [];
         for (var i = 0; i < data.length; i++) {
-          var park = data[i];
-          context.push(park);
-        }
-        for (var i = 0; i < context.length; i++) {
-            console.log(context[i]);
+          //var park = JSON.parse(data[i]);
+          console.log(data[i].park_name);
         }
 	//console.log(data);
-        res.render('Results');
+        res.render('Results', data);
       });
     }
     http.request(options,callback).end();
