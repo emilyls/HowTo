@@ -19,12 +19,31 @@ body {
 	float: left;
 	padding-left: 2em;
 }
+
 #header li a {
 	display: block;
 	padding-right: 0.25em;
 	padding-bottom: 1em;
 	text-decoration: none;
 	font-weight: bold;
+}
+
+#header li a:link {
+	color: #215f21;
+}
+
+
+#header li a:visited {
+	color: #215f21;
+}
+
+#header #current {
+	background-color: #215f21;
+	color: #8dd88d;
+	padding-top: 0.25em;
+	padding-left: 0.25em;
+	padding-right: 0.25em;
+	padding-bottom: 1em;
 }
 
 #header h1 {
