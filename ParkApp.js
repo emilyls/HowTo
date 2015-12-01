@@ -24,15 +24,15 @@ app.get('/AllParkData', function(req, res) {
     path: '/data/index.cfm/parks'
   };
   callback = function(response) {
-    var str = '';
+    var string = '';
     response.on('data', function (chunk) {
-    	str += chunk;
+    	string += chunk;
     });
     response.on('end', function() {
-      var data = JSON.parse(str);
+      var data = JSON.parse(string);
       var parks = [];
       for (var i = 0; i < data.length; i++) {
-        parks.push({'name':data[i].park_name, 'id': data[i].park_id});
+        parks.push({'name': data[i].park_name, 'id': data[i].park_id});
       }
       var context = {};
       context.data = parks;
@@ -50,12 +50,12 @@ app.post('/ParkPhotos', function(req, res) {
     path: '/data/index.cfm/parkPhotos?parkId=' + req.body.photos_Id 
   };
   callback = function(response) {
-    var str = '';
+    var string = '';
     response.on('data', function (chunk) {
-      str += chunk;
+      string += chunk;
     });
     response.on('end', function() {
-      var data = JSON.parse(str);
+      var data = JSON.parse(string);
       var photos = [];
       for (var i = 0; i < data.length; i++) {
         var thumbnail = data[i].thumbFile.replace(/ /g,'%20');
@@ -104,16 +104,16 @@ app.post('/ParkFeatures', function(req, res) {
     path: '/data/index.cfm/parkFeatures?' + string 
   };
   callback = function(response) {
-    var str = '';
+    var string = '';
     response.on('data', function (chunk) {
-      str += chunk;
+      string += chunk;
     });
     response.on('end', function() {
-      var data = JSON.parse(str);
+      var data = JSON.parse(string);
       var context = {};
       var parks = [];
       for (var i = 0; i < data.length; i++) {
-	var park = {};
+	      var park = {};
         var features = [];
         park.latitude = data[i].park_latitude;
         park.longitude = data[i].park_longitude;
@@ -180,12 +180,12 @@ console.log(string);
     path: '/data/index.cfm/parkEvents?' + string 
   };
   callback = function(response) {
-    var str = '';
+    var string = '';
     response.on('data', function (chunk) {
-      str += chunk;
+      string += chunk;
     });
     response.on('end', function() {
-      var data = JSON.parse(str);
+      var data = JSON.parse(string);
       var context = {};
       var eventList = [];
       for (var i = 0; i < data.length; i++) {
@@ -216,12 +216,12 @@ app.get('/AllFeatures', function(req, res) {
     path: '/data/index.cfm/features'
   };
   callback = function(response) {
-    var str = '';
+    var string = '';
     response.on('data', function (chunk) {
-      str += chunk;
+      string += chunk;
     });
     response.on('end', function() {
-      var data = JSON.parse(str);
+      var data = JSON.parse(string);
       var features = [];
       for (var i = 0; i < data.length; i++) {
         features.push({'class':data[i].featureClass, 'title': data[i].featureTitle});

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+ 		<meta charset="UTF-8">
+  		<title>How To: Oregon State Parks API</title>
+  		<link rel="stylesheet" href="style.css" type="text/css">
+ 	</head>
+	<body>
+		<section id="header">
+         <h1>Oregon State Parks API</h1>
+         <ul>
+           <li><a href="GettingStarted.html">Getting Started</a>
+           <li><a href="Parks.html">Parks</a>
+           <li><a href="ParkPhotos.html">Park Photos</a>
+           <li><a href="ParkFeatures.html">Park Features</a>
+           <li><a href="Events.html">Events</a>
+           <li><a href="http://52.88.123.171:3000/home">Example</a>
+         </ul>
+      </section>
+      <section id ="text">
+         <h3>Events</h3>
+         <p>Requests for event data are sent to:</p>
+         <code>http://oregonstateparks.org/data/index.cfm/parkEvents?</code>
+         <p>With the following possible parameters:</p>
+         <code>parkId=</code></br>
+         <code>categoryId=</code></br>
+         <code>descr=</code></br>
+         <code>dateFrom=</code></br>
+         <code>dateTo=</code></br>
+         <code>eventId=</code>
+
+         <p>The following are the current category IDs which can be used:</br>
+            0 = all</br>
+            1 = General</br>
+            2 = For Kids</br>
+            3 = Nature</br>
+            4 = State Parks Day</br>
+
+         <p>Multiple words can be used to search the event description and a like search is used. Each keyword must be sent as a new <code>descr=keyword</code> pair:<p>
+         <code>http://oregonstateparks.org/data/index.cfm/parkEvents?descr=food&descr=fun</code>
+
+         <p>Dates must be sent in the format MM/DD/YYYY and <code>dateFrom</code> returns all dates including and after the date provided, while <code>dateTo</code> returns all dates before and not including the date provided.<p>
+         <code>http://oregonstateparks.org/data/index.cfm/parkEvents?dateTo=12/15/2015</code>
+
+         <p>Multiple parameters can be sent as well:</p>
+         <code>http://oregonstateparks.org/data/index.cfm/parkEvents?parkId=103&dateTo=12/15/2015</code>
+
+         <p>The default search will return all events beginning the day the request is made.</p>
+
+         <p>The HTTP request can be constructed in the same way as previous requests, once you have a constructed a string with the desired parameters:</p>
+         <pre><code>var options = {
+  host: 'oregonstateparks.org',
+  path: '/data/index.cfm/parkEvents?' + string 
+};
+         </code></pre>
+
+         <p>Result:</p>
+         <pre><code>[         
+  {
+    "event_description": "Come join in for an early morning run on Thanksgiving day!",
+    "park_event_id": 44958,
+    "park_name": "Historic Columbia River Highway State Trail",
+    "event_end": "November, 26 2015 12:00:00",
+    "park_id": 113,
+    "event_start": "November, 26 2015 08:00:00",
+    "event_location": "West HCRH trailhead",
+    "allDay": 0,
+    "park_event_category_descr": "General",
+    "title": "Turkey Trot"
+   },
+   …
+   // More Events
+]
+         </code></pre>
+
+      </section>
+      <section id="footer">
+         <a href="ParkFeatures.html" id="previous">Previous</a>
+         <a href="http://52.88.123.171:3000/home" id="next">Example</a>
+      </section>
+	</body>
+</html>

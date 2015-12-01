@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+ 		<meta charset="UTF-8">
+  		<title>How To: Oregon State Parks API</title>
+  		<link rel="stylesheet" href="style.css" type="text/css">
+ 	</head>
+	<body>
+		<section id="header">
+      <h1>Oregon State Parks API</h1>
+      <ul>
+        <li><a href="GettingStarted.html">Getting Started</a>
+        <li><a href="Parks.html">Parks</a>
+        <li><a href="ParkPhotos.html">Park Photos</a>
+        <li><a href="ParkFeatures.html">Park Features</a>
+        <li><a href="Events.html">Events</a>
+        <li><a href="http://52.88.123.171:3000/home">Example</a>
+      </ul>
+    </section>
+		<section id="text">
+      <h3>Park Photos</h3>
+      <p>If you are interested in the photos of a specific park, this is the request you will want to make. The GET request is sent to:</p>
+      <code>http://oregonstateparks.org/data/index.cfm/parkPhotos?parkId=##</code>
+      <p>Here ## is replaced with the id of the park you are interested in. In order to use this request, you will need to know the id of the park that you are interested in. I would recommend first setting up the previous request and using the list of park names and ids to be able to search for specific parks. You must include the park id in this request or you will not get a response.</p>
+      <p>I used the same format for the http request, with a slight modification to the options:</p>
+      <pre><code>var options = {
+  host: 'oregonstateparks.org',
+  path: '/data/index.cfm/ parkPhotos?parkId=’ + parkId
+};
+      </code></pre>
+      <p>Once parsed, the returned JSON object consists of pairs of photos in thumbnail and full size.</p>
+      <pre><code>[
+   {
+      "thumbFile": "http://oregonstateparks.org/index.cfm?do=main.loadImage&Image=Hat Rock State Park\\thumbs\\Hat Rock State Park_thumb.jpg",
+      "imageFile": "http://oregonstateparks.org/index.cfm?do=main.loadImage&Image=Hat Rock State Park\\Hat Rock State Park.jpg"
+   },
+   {
+      "thumbFile": "http://oregonstateparks.org/index.cfm?do=main.loadImage&Image=Hat Rock State Park\\thumbs\\Hat Rock_DSC_1186-east6_thumb.jpg",
+      "imageFile": "http://oregonstateparks.org/index.cfm?do=main.loadImage&Image=Hat Rock State Park\\Hat Rock_DSC_1186-east6.jpg"
+   },
+   {
+      "thumbFile": "http://oregonstateparks.org/index.cfm?do=main.loadImage&Image=Hat Rock State Park\\thumbs\\hrpond_thumb.jpg",
+      "imageFile": "http://oregonstateparks.org/index.cfm?do=main.loadImage&Image=Hat Rock State Park\\hrpond.jpg"
+   },
+   {
+      "thumbFile": "http://oregonstateparks.org/index.cfm?do=main.loadImage&Image=Hat Rock State Park\\thumbs\\hrupperpicnic1_thumb.jpg",
+      "imageFile": "http://oregonstateparks.org/index.cfm?do=main.loadImage&Image=Hat Rock State Park\\hrupperpicnic1.jpg"
+   }
+]
+      </code></pre>
+      <p>In order to be able to use these links, some modification is required. As you can see, the image names have spaces in the URI. There are functions in JavaScript such as <code>encodeURI()</code> that can encode a URI for you, however you cannot use this function on these strings. If you do use <code>encodeURI()</code>, it will encode both the spaces and the forward slashes in the string.</p>
+      <p>Before:</p>
+      <code>http://oregonstateparks.org/index.cfm?do=main.loadImage&Image=Hat Rock State Park\\hrupperpicnic1.jpg</code>
+      <p>After:</p>
+      <code>http://oregonstateparks.org/index.cfm?do=main.loadImage&Image=Hat%20Rock%20State%20Park%5Chrupperpicnic1.jpg</code>
+      <p>However, in order to get the picture, you need to leave the forward slashes and only encode the spaces. You can do this, by finding the spaces in the string and replacing them with ‘%20’.</p>
+      <pre><code>var string = http://oregonstateparks.org/index.cfm?do=main.loadImage&Image=Hat Rock State Park\\hrupperpicnic1.jpg
+string.replace(/ /g, ’%20’);
+      </code></pre>
+      <p>Which results in:</p>
+      <code>http://oregonstateparks.org/index.cfm?do=main.loadImage&Image=Hat%20Rock%20State%20Park\\hrupperpicnic1.jpg</code>
+      <p>Once that has been done, the strings can be used in HTML to display the photos.</p>
+    </section>
+    <section id="footer">
+      <a href="ParkFeatures.html" id="next">Next</a>
+      <a href="Parks.html" id="previous">Previous</a>
+    </section>
+	</body>
+</html>

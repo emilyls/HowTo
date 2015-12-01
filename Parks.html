@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+ 		<meta charset="UTF-8">
+  		<title>How To: Oregon State Parks API</title>
+  		<link rel="stylesheet" href="style.css" type="text/css">
+ 	</head>
+	<body>
+    <section id="header">
+      <h1>Oregon State Parks API</h1>
+      <ul>
+        <li><a href="GettingStarted.html">Getting Started</a>
+        <li><a href="Parks.html">Parks</a>
+        <li><a href="ParkPhotos.html">Park Photos</a>
+        <li><a href="ParkFeatures.html">Park Features</a>
+        <li><a href="Events.html">Events</a>
+        <li><a href="http://52.88.123.171:3000/home">Example</a>
+      </ul>
+    </section>
+		<section id="text">
+      <h3>Parks</h3>
+			<p>The most general call that can be made to the Oregon State Parks API results in a list of all of the state parks in Oregon. The GET request is sent to:</p>
+			<code>http://oregonstateparks.org/data/index.cfm/parks</code>
+			<p>If you are using node.js, you can set this up with an HTTP request. The data will be returned in chunks, so it is important to concatenate those before attempting to parse the JSON. Once you have the data stored as a JSON object, you can pull out the data you are interested in using.</p>
+			<pre><code>var options = {
+  host: 'oregonstateparks.org',
+  path: '/data/index.cfm/parks'
+};
+callback = function(response) {
+  var string = '';
+  response.on('data', function (chunk) {
+    string += chunk;
+  });
+  response.on('end', function() {
+    var data = JSON.parse(string);
+    // Your code here
+  });
+}
+http.request(options,callback).end();
+			</code></pre>
+
+			<p>Response:</p>
+			<pre><code>[ 
+  { 
+    "park_latitude":44.659645,
+    "park_narrative":"&lt;p&gt;\n\tDiggers, this park&#39;s for you! Razor clamming is a favorite activity as well as surfing. If you plan to visit prime Newport attractions like the Oregon Coast Aquarium and Hatfield Marine Science Center, you must stop in for a refreshing picnic at Agate Beach.&lt;/p&gt;\n&lt;p&gt;\n\tAgate Beach Wayside is situated between the new and old highway 101. There is a large parking lot with room for trailer parking. The beach access trail consists of a tunnel that goes underneath the old highway 101 to a large sandy beach area.&lt;/p&gt;\n",
+    "park_name":"Agate Beach State Recreation Site",
+    "park_id":152,
+    "park_longitude":-124.056381 
+  },
+  …
+  // All parks will be in the response
+]
+			</code></pre>
+			<p>This is a good request to use if you want a list of park names and ids, since most of the other requests that can be used in the API can use this information to return more specific information. You cannot include any parameters in the GET request, so it will always return <em>all</em> of the parks.</p>
+		</section>
+    <section id="footer">
+      <a href="ParkPhotos.html" id="next">Next</a>
+      <a href="GettingStarted.html" id="previous">Previous</a>
+    </section>
+	</body>
+</html>
