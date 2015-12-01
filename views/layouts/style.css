@@ -1,4 +1,8 @@
-body {
+.body {
 	font-family: sans-serif;
+	margin: 5em;
+}
+
+form {
 	margin: 5em;
 }

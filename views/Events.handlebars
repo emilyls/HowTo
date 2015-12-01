@@ -1,4 +1,5 @@
 <h3>Events</h3>
+{{#if events}}
   {{#each data}}
   <p>{{this.title}}: {{this.event_id}}</p>
 	<ul>
@@ -10,3 +11,6 @@
 	</ul>
   <p>{{this.description}}</p>
   {{/each}}
+{{else}}
+  <p>There are no events matching those criteria.</p>
+{{/if}}

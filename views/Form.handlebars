@@ -1,68 +1,96 @@
-		<!-- All Park Data -->
-		<form action="http://52.88.123.171:3000/AllParkData" method="get">
-			<fieldset>
-				<legend>All Park Data</legend>
-				<input type="submit" id="allParkData" value="Get All Park Data">
-			</fieldset>
-		</form>
-		<!-- Park Photos -->
-		<form action="http://52.88.123.171:3000/ParkPhotos" method="post">
-			<fieldset>
-				<legend>Park Photos</legend>
-        		<label for="photos_Id">Park ID:</label>
-        		<input type="number" name="photos_Id" id="photos_Id">
-        	</br>
-        		<input type="submit" id="photos" value="Get Photos">
-        	</fieldset>
-    	</form>
-		<!-- Park Features -->
-		<form action="http://52.88.123.171:3000/ParkFeatures" method="post">
-			<fieldset>
-		        <legend>Park Features</legend>
-		        <label for="features_Id">Park ID:</label>
-		        <input type="number" name="features_Id" id="features_Id">
-		        <p>or</p>
-		        <label for="features_Name">Park Name:</label>
-		        <input type="text" name="features_Name" id="features_Name">
-		        <p>or</p>
-		        <label for="features_Titles">Icon Titles:</label>
-		        <input type="text" name="features_Titles" id="features_Titles">
-		        <p>or</p>
-		        <label for="features_Class">Icon Class:</label>
-		        <input type="text" name="features_Class" id="features_Class">
-		    </br>
-		        <input type="submit" id="features" value="Get Features">
-		    </fieldset>
-		</form>
-		<!-- Events -->
-		<form action="http://52.88.123.171:3000/Events" method="post">
-			<fieldset>
-		        <legend>Park Events</legend>
-		        <label for="event_Id">Park ID:</label>
-		        <input type="number" name="event_Id" id="event_Id">
-		        <p>or</p>
-		        <label for="event_Category">Category ID:</label>
-		        <input type="number" name="event_Category" id="event_Category">
-		        <p>or</p>
-		        <label for="event_Description">Description:</label>
-		        <input type="text" name="event_Description" id="event_Description">
-		        <p>or</p>
-		        <label for="event_DateFrom">Date From:</label>
-		        <input type="date" name="event_DateFrom" id="event_DateFrom">
-		        <p>or</p>
-		        <label for="event_DateTo">Date To:</label>
-		        <input type="date" name="event_DateTo" id="event_DateTo">
-		        <p>or</p>
-		        <label for="event_EventId">Event ID:</label>
-		        <input type="number" name="event_EventId" id="event_EventId">
-		    </br>
-		        <input type="submit" id="event" value="Get Events">
-		    </fieldset>
-		</form>
-		<!-- Features -->
-		<form action="http://52.88.123.171:3000/AllFeatures" method="get">
-			<fieldset>
-				<legend>All Park Features</legend>
-				<input type="submit" id="allFeatures" value="Get Possible Features">
-			</fieldset>
-		</form>
+<style>
+  body {
+    margin: 5em; 
+  }
+  header {
+    text-align: right;
+  }
+  .forms {
+    width: 100%;
+  }
+  label {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+  }
+  input {
+    width: 200px;
+  }
+  legend {
+    font-weight: bold;
+    font-size: 1em;
+  }
+  input {
+    margin-bottom: 1em;
+  }
+  #button {
+    width: 150px;
+  }
+</style>
+<header>
+  <a href="http://oregonstateparks.org">oregonstateparks.org</a>
+</header>
+<span class="forms">
+  <!-- All Park Data -->
+  <form action="http://52.88.123.171:3000/AllParkData" method="get">
+    <fieldset>
+      <legend>All Park Data</legend>
+      <input id="button" type="submit" id="allParkData" value="Get All Park Data">
+    </fieldset>
+  </form>
+  <!-- Park Photos -->
+  <form action="http://52.88.123.171:3000/ParkPhotos" method="post">
+    <fieldset>
+      <legend>Park Photos</legend>
+      <label for="photos_Id">Park ID:</label>
+      <input type="number" name="photos_Id" id="photos_Id"></br>
+      <input id="button" type="submit" id="photos" value="Get Photos">
+    </fieldset>
+  </form>
+  <!-- Park Features -->
+  <form action="http://52.88.123.171:3000/ParkFeatures" method="post">
+    <fieldset>
+      <legend>Park Features</legend>
+        <label for="features_Id">Park ID:</label>
+        <input type="number" name="features_Id" id="features_Id"> 
+        <label for="features_Name">Park Name:</label>
+        <input type="text" name="features_Name" id="features_Name">
+      </br>
+        <label for="features_Titles">Icon Titles:</label>
+        <input type="text" name="features_Titles" id="features_Titles">
+        <label for="features_Class">Icon Class:</label>
+        <input type="text" name="features_Class" id="features_Class">
+      </br>
+      <input id="button" type="submit" id="features" value="Get Features">
+    </fieldset>
+  </form>
+  <!-- Events -->
+  <form action="http://52.88.123.171:3000/Events" method="post">
+    <fieldset>
+      <legend>Park Events</legend>
+      <label for="event_Id">Park ID:</label>
+      <input type="number" name="event_Id" id="event_Id">
+      <label for="event_Category">Category ID:</label>
+      <input type="number" name="event_Category" id="event_Category">
+      </br>
+      <label for="event_Description">Description:</label>
+      <input type="text" name="event_Description" id="event_Description">
+      <label for="event_EventId">Event ID:</label>
+      <input type="number" name="event_EventId" id="event_EventId">
+      </br>
+      <label for="event_DateFrom">Date From:</label>
+      <input type="date" name="event_DateFrom" id="event_DateFrom">
+      <label for="event_DateTo">Date To:</label>
+      <input type="date" name="event_DateTo" id="event_DateTo">
+      </br>
+      <input id="button" type="submit" id="event" value="Get Events">
+    </fieldset>
+  </form>
+  <!-- Features -->
+  <form action="http://52.88.123.171:3000/AllFeatures" method="get">
+    <fieldset>
+      <legend>All Park Features</legend>
+      <input id="button" type="submit" id="allFeatures" value="Get Possible Features">
+    </fieldset>
+  </form>
+</span>
