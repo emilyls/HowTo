@@ -154,7 +154,7 @@ app.post('/Events', function(req, res) {
       string += '&';
     }
     string += 'descr=';
-    string += req.body.event_Description;
+    string += encodeURI(req.body.event_Description);
   }
   if (req.body.event_DateFrom) {
     if (string != "") {
@@ -188,25 +188,33 @@ app.post('/Events', function(req, res) {
       string += chunk;
     });
     response.on('end', function() {
-      var data = JSON.parse(string);
-      var context = {};
-      var eventList = [];
-      for (var i = 0; i < data.length; i++) {
-        var eventData = {};
-        eventData.description = data[i].event_description;
-        eventData.event_id = data[i].park_event_id;
-        eventData.park_name = data[i].park_name;
-        eventData.id = data[i].park_id;
-        eventData.begin = data[i].event_start;
-        eventData.end = data[i].event_end;
-        eventData.location = data[i].event_location;
-        eventData.all_day = data[i].allDay;
-        eventData.category = data[i].park_event_category_desr;
-        eventData.title = data[i].title;
-        eventList.push(eventData);
+      if (string == "") {
+	var context = {};
+        context.events = false;
+        res.render('Events', context);
       }
-      context.data = eventList;
-      res.render('Events', context);
+      else {
+	      var data = JSON.parse(string);
+	      var context = {};
+	      var eventList = [];
+	      for (var i = 0; i < data.length; i++) {
+		var eventData = {};
+		eventData.description = data[i].event_description;
+		eventData.event_id = data[i].park_event_id;
+		eventData.park_name = data[i].park_name;
+		eventData.id = data[i].park_id;
+		eventData.begin = data[i].event_start;
+		eventData.end = data[i].event_end;
+		eventData.location = data[i].event_location;
+		eventData.all_day = data[i].allDay;
+		eventData.category = data[i].park_event_category_desr;
+		eventData.title = data[i].title;
+		eventList.push(eventData);
+	      }
+	      context.events = true;
+	      context.data = eventList;
+	      res.render('Events', context);
+	      }
     });
   }
   http.request(options,callback).end();
