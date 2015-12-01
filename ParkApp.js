@@ -44,6 +44,10 @@ app.get('/AllParkData', function(req, res) {
 
 app.post('/ParkPhotos', function(req, res) {
   
+  if (!req.body.photos_Id) {
+    res.render('Invalid');
+    return;
+  } 
   var url = 'http://oregonstateparks.org/data/index.cfm/parkPhotos';
   var options = {
     host: 'oregonstateparks.org',
@@ -173,7 +177,6 @@ app.post('/Events', function(req, res) {
     string += 'eventId=';
     string += req.body.event_EventId;
   }
-console.log(string);
   var url = 'http://oregonstateparks.org/data/index.cfm/parkEvents';
   var options = {
     host: 'oregonstateparks.org',
