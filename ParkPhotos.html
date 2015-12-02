@@ -14,16 +14,19 @@
         <li><a id="current" href="ParkPhotos.html">Park Photos</a>
         <li><a href="ParkFeatures.html">Park Features</a>
         <li><a href="Events.html">Events</a>
+        <li><a href="Features.html">Features</a>
         <li><a href="http://52.88.123.171:3000/home">Example</a>
-        <li><a href="http://oregonstateparks.org">oregonstateparks.org</a>
       </ul>
     </section>
 		<section id="text">
       <h3>Park Photos</h3>
-      <p>If you are interested in the photos of a specific park, this is the request you will want to make. The GET request is sent to:</p>
-      <code>http://oregonstateparks.org/data/index.cfm/parkPhotos?parkId=##</code>
-      <p>Here ## is replaced with the id of the park you are interested in. In order to use this request, you will need to know the id of the park that you are interested in. I would recommend first setting up the previous request and using the list of park names and ids to be able to search for specific parks. You must include the park id in this request or you will not get a response.</p>
-      <p>I used the same format for the http request, with a slight modification to the options:</p>
+      <p>If you are interested in the photos of a specific park, this is the request you will want to make. In order to use this request, you will need to know the id of the park that you are requesting data from, it is not possible to use the park name or any other parameter. This is a good place to use the general Parks request to get the desired park ID. You must include the park ID in this request or you will not get an error.<p>
+
+      </p>The GET request must take the following format, where <code>##</code> is replaced with the ID of the park you are interested in:
+        <pre><code>http://oregonstateparks.org/data/index.cfm/parkPhotos?parkId=##</code></pre>
+      </p>
+      
+      <p>I used the same format for the HTTP request, with just a slight modification to the options:</p>
       <pre><code>var options = {
   host: 'oregonstateparks.org',
   path: '/data/index.cfm/ parkPhotos?parkId=’ + parkId
@@ -50,21 +53,26 @@
 ]
       </code></pre>
       <p>In order to be able to use these links, some modification is required. As you can see, the image names have spaces in the URI. There are functions in JavaScript such as <code>encodeURI()</code> that can encode a URI for you, however you cannot use this function on these strings. If you do use <code>encodeURI()</code>, it will encode both the spaces and the forward slashes in the string.</p>
-      <p>Before:</p>
-      <code>http://oregonstateparks.org/index.cfm?do=main.loadImage&Image=Hat Rock State Park\\hrupperpicnic1.jpg</code>
-      <p>After:</p>
-      <code>http://oregonstateparks.org/index.cfm?do=main.loadImage&Image=Hat%20Rock%20State%20Park%5Chrupperpicnic1.jpg</code>
-      <p>However, in order to get the picture, you need to leave the forward slashes and only encode the spaces. You can do this, by finding the spaces in the string and replacing them with ‘%20’.</p>
+      <p>Before using <code>encodeURI()</code>:
+      <pre><code>http://oregonstateparks.org/index.cfm?do=main.loadImage&Image=Hat Rock State Park\\hrupperpicnic1.jpg</code></pre>
+      After using <code>encodeURI()</code>:
+      <pre><code>http://oregonstateparks.org/index.cfm?do=main.loadImage&Image=Hat%20Rock%20State%20Park%5Chrupperpicnic1.jpg</code></pre>
+      </p>
+      <p>However, in order to get the picture, you need to leave the forward slashes and only encode the spaces. One way to do this, is by finding the spaces in the string and replacing them with ‘%20’.
       <pre><code>var string = http://oregonstateparks.org/index.cfm?do=main.loadImage&Image=Hat Rock State Park\\hrupperpicnic1.jpg
 string.replace(/ /g, ’%20’);
       </code></pre>
-      <p>Which results in:</p>
-      <code>http://oregonstateparks.org/index.cfm?do=main.loadImage&Image=Hat%20Rock%20State%20Park\\hrupperpicnic1.jpg</code>
-      <p>Once that has been done, the strings can be used in HTML to display the photos.</p>
+      Which results in:
+      <pre><code>string = http://oregonstateparks.org/index.cfm?do=main.loadImage&Image=Hat%20Rock%20State%20Park\\hrupperpicnic1.jpg</code></pre>
+      </p>
+      <p>Once you have parsed the JSON and properly encoded the strings, the URIs can be used in your HTML to display the desired photos.</p>
     </section>
     <section id="footer">
       <a href="ParkFeatures.html" id="next">Next</a>
       <a href="Parks.html" id="previous">Previous</a>
+    </section>
+    <section id="signature">
+      <p>Emily Snyder | CS 290 | 2015 | <a href="http://oregonstateparks.org">oregonstateparks.org</a></p>
     </section>
 	</body>
 </html>

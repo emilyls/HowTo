@@ -9,6 +9,10 @@ body {
 	top: 0;
 }
 
+.right {
+	float: right;
+}
+
 #header ul {
 	list-style-type: none;
 	margin: 0;
@@ -22,7 +26,6 @@ body {
 
 #header li a {
 	display: block;
-	padding-right: 0.25em;
 	padding-bottom: 1em;
 	text-decoration: none;
 	font-weight: bold;
@@ -52,17 +55,10 @@ body {
 	font-size: 2em;
 }
 
-#text{
-	margin-top: 10em;
-	margin-left: 5em;
-	margin-right: 5em;
-	font-family:sans-serif;
-}
-
 #footer {
 	margin-top: 2em;
-	margin-right: 5em;
-	margin-left: 5em;
+	margin-right: 15%;
+	margin-left: 15%;
 	margin-bottom: 2em;
 	font-size: 1em;
 }
@@ -93,6 +89,16 @@ body {
 
 blockquote {
 	font-style: italic;
+	margin-left: 20%;
+	margin-right: 20%;
+}
+
+
+#text{
+	margin-top: 10em;
+	margin-left: 15%;
+	margin-right: 15%;
+	text-align: justify;
 }
 
 #text a:link {
@@ -101,4 +107,39 @@ blockquote {
 
 #text a:visited {
 	color: #6600ff;
+}
+
+img {
+	width: 75%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+p {
+	margin-top: 2em;
+}
+
+.comment {
+	color: purple;
+}
+
+pre {
+	overflow: scroll;
+	background-color: #F5F5F5;
+}
+
+#signature {
+	margin-top: 5em;
+	margin-left: 15%;
+	text-align: center;
+	font-weight: normal;
+}
+
+#signature a:link {
+	color: black;
+}
+
+#signature a:visited {
+	color: black;
 }

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+ 		<meta charset="UTF-8">
+  		<title>How To: Oregon State Parks API</title>
+  		<link rel="stylesheet" href="style.css" type="text/css">
+ 	</head>
+	<body>
+		<section id="header">
+         <h1>Oregon State Parks API</h1>
+         <ul>
+           <li><a href="GettingStarted.html">Getting Started</a>
+           <li><a href="Parks.html">Parks</a>
+           <li><a href="ParkPhotos.html">Park Photos</a>
+           <li><a href="ParkFeatures.html">Park Features</a>
+           <li><a href="Events.html">Events</a>
+           <li><a id="current" href="Features.html">Features</a>
+           <li><a href="http://52.88.123.171:3000/home">Example</a>
+         </ul>
+      </section>
+      <section id ="text">
+         <h3>Features</h3>
+         <p>The most basic call to the Oregon State Parks API, simply returns a list of all of the feature categories and titles at the parks. If you are looking at the Oregon State Parks website, these are the little icons which appear on each park's page. No parameters can be used, a simple GET request is sent to:
+         <pre><code>http://oregonstateparks.org/data/index.cfm/features?</code></pre></p>
+
+         <p>The HTTP request can be constructed in the same way as the first request for Park data:</p>
+         <pre><code>var options = {
+  host: 'oregonstateparks.org',
+  path: '/data/index.cfm/features' 
+};
+         </code></pre>
+
+         <p>Format of JSON returned by request:</p>
+         <pre><code>[
+  {
+    "featureClass":"ampitheater",
+      "featureTitle":"Ampitheater"
+  },
+  {
+    "featureClass":"beach",
+    "featureTitle":"Beach Access"
+  },
+  {
+    "featureClass":"bike",
+    "featureTitle":"Bike Path"
+  },
+   …
+   <span class="comment">// More Features</span>
+]
+         </code></pre>
+
+      </section>
+      <section id="footer">
+         <a href="Events.html" id="previous">Previous</a>
+         <a href="http://52.88.123.171:3000/home" id="next">Example</a>
+      </section>
+      <section id="signature">
+         <p>Emily Snyder | CS 290 | 2015 | <a href="http://oregonstateparks.org">oregonstateparks.org</a></p>
+      </section>
+	</body>
+</html>

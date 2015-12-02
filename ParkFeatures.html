@@ -14,25 +14,25 @@
         <li><a href="ParkPhotos.html">Park Photos</a>
         <li><a id="current" href="ParkFeatures.html">Park Features</a>
         <li><a href="Events.html">Events</a>
+        <li><a href="Features.html">Features</a>
         <li><a href="http://52.88.123.171:3000/home">Example</a>
-        <li><a href="http://oregonstateparks.org">oregonstateparks.org</a>
       </ul>
     </section>
 		<section id ="text">
       <h3>Park Features</h3>
 			<p>Park features can be searched by park id, park name, icon title or icon class. Icon title and class refer to the features and the general categories. For example, Bike Path is the icon title and bike is the icon class. You can get a list of all of the possible titles and classes with the general request to features that will be discussed later. The park features request is sent to:</p>
-			<code>http://oregonstateparks.org/data/index.cfm/parkFeatures?</code>
-      <p>With the following possible parameters:</p>
-      <code>parkId=</code></br>
-      <code>parkName=</code></br>
-      <code>iconTitles=</code></br>
-      <code>iconClasses=</code>
-      <p>If no parameters are specified, or <code>parkId=0</code> is used, a list of all features of all parks is returned.</p> 
+			<pre><code>http://oregonstateparks.org/data/index.cfm/parkFeatures?</code></pre>
+      <p>With the following possible parameters:
+      <pre><code>parkId=</code>
+parkName=
+iconTitles=
+iconClasses=</code></pre>
+      If no parameters are specified, or <code>parkId=0</code> is used, a list of all features of all parks is returned.</p> 
       <p>In order to request multiple parks by name, icons by title or by class, you can do so by separating parameters with commas. Make sure there is no space between the term and the comma:</p>
-      <code>http://oregonstateparks.org/data/index.cfm/parkFeatures?parkName=Agate%20Beach%20State%20Recreation%20Site,Ainsworth%20State%20Park</code></br>
-      <code>http://oregonstateparks.org/data/index.cfm/parkFeatures?iconTitles=Beach%20Access,Fishing</code></br>
-      <code>http://oregonstateparks.org/data/index.cfm/parkFeatures?iconClasses=beach,bike</code>
-      <p>Again, the HTTP request can be set up in the same way as previous calls, with a modification to the options.</p>
+      <pre><code>http://oregonstateparks.org/data/index.cfm/parkFeatures?parkName=Agate%20Beach%20State%20Recreation%20Site,Ainsworth%20State%20Park
+http://oregonstateparks.org/data/index.cfm/parkFeatures?iconTitles=Beach%20Access,Fishing
+http://oregonstateparks.org/data/index.cfm/parkFeatures?iconClasses=beach,bike</code></pre>
+      <p>Again, the HTTP request can be set up in the same way as previous calls, with a modification to the options to include the desired parameter(s).</p>
       <pre><code>var options = {
   host: 'oregonstateparks.org',
   path: '/data/index.cfm/parkFeatures?' + string 
@@ -62,7 +62,7 @@
 …
 ]
       </code></pre>
-      <p>A nested loop in the callback can handle parsing out the repeated data and turn the results into a list of park objects that contains its features:</p>
+      <p>A nested loop in the callback can handle parsing out the repeated data and turn the results into a list of park objects that contains its features:
       <pre><code>var parks = [];
   for (var i = 0; i < data.length; i++) {
   var park = {};
@@ -80,8 +80,8 @@
   park.features = features;
   parks.push({'park': park}); 
 }
-      </code></pre>
-      <p>Result:</p>
+      </code></pre></p>
+      <p>Format of JSON object after separating features out by park:
       <pre><code>[
   {
     park: {
@@ -100,17 +100,20 @@
             title: 'Hiking Trails',
           },
           ...
-          // Other features
+          <span class="comment">// Other features</span>
         ]
       }
   }
 ]
-      </code></pre>
+      </code></pre><p>
       <p>This makes it easy to work with parks that have multiple features that match the request.</p>
 		</section>
     <section id="footer">
       <a href="Events.html" id="next">Next</a>
       <a href="ParkPhotos.html" id="previous">Previous</a>
+    </section>
+    <section id="signature">
+      <p>Emily Snyder | CS 290 | 2015 | <a href="http://oregonstateparks.org">oregonstateparks.org</a></p>
     </section>
 	</body>
 </html>

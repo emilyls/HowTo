@@ -14,39 +14,40 @@
            <li><a href="ParkPhotos.html">Park Photos</a>
            <li><a href="ParkFeatures.html">Park Features</a>
            <li><a id="current" href="Events.html">Events</a>
+           <li><a href="Features.html">Features</a>
            <li><a href="http://52.88.123.171:3000/home">Example</a>
-           <li><a href="http://oregonstateparks.org">oregonstateparks.org</a>
          </ul>
       </section>
       <section id ="text">
          <h3>Events</h3>
-         <p>Requests for event data are sent to:</p>
-         <code>http://oregonstateparks.org/data/index.cfm/parkEvents?</code>
-         <p>With the following possible parameters:</p>
-         <code>parkId=</code></br>
-         <code>categoryId=</code></br>
-         <code>descr=</code></br>
-         <code>dateFrom=</code></br>
-         <code>dateTo=</code></br>
-         <code>eventId=</code>
+         <p>It is possible to request information regarding events happening at different Oregon State parks. The request returns a description of the event, the park name and id, the start and end dates and times, where at the park the event is located, the event title and id, an event category and whether it is an all day event. This request can be used to create a calendar of events or to provide information about what is happening at a specific park.</p>
+         <p>Requests for event data are sent to:
+         <pre><code>http://oregonstateparks.org/data/index.cfm/parkEvents?</code></pre>
+         With the following possible parameters:
+         <pre><code>parkId=
+categoryId=
+descr=
+dateFrom=
+dateTo=
+eventId=</code></pre>
 
-         <p>The following are the current category IDs which can be used:</br>
-            0 = all</br>
-            1 = General</br>
-            2 = For Kids</br>
-            3 = Nature</br>
-            4 = State Parks Day</br>
+         The following are the current category IDs which can be used:
+            <pre><code>0 = all
+1 = General
+2 = For Kids
+3 = Nature
+4 = State Parks Day</code></pre></p>
 
-         <p>Multiple words can be used to search the event description and a like search is used. Each keyword must be sent as a new <code>descr=keyword</code> pair:<p>
-         <code>http://oregonstateparks.org/data/index.cfm/parkEvents?descr=food&descr=fun</code>
+         <p>Multiple words can be used to search the event description and a like search is used. Each keyword must be sent as a new <code>descr=keyword</code> pair:
+         <pre><code>http://oregonstateparks.org/data/index.cfm/parkEvents?descr=food&descr=fun</code></pre>
 
-         <p>Dates must be sent in the format MM/DD/YYYY and <code>dateFrom</code> returns all dates including and after the date provided, while <code>dateTo</code> returns all dates before and not including the date provided.<p>
-         <code>http://oregonstateparks.org/data/index.cfm/parkEvents?dateTo=12/15/2015</code>
+         Dates must be sent in the format <code>MM/DD/YYYY</code> and <code>dateFrom</code> returns all dates including and after the date provided, while <code>dateTo</code> returns all dates before and not including the date provided.
+         <pre><code>http://oregonstateparks.org/data/index.cfm/parkEvents?dateTo=12/15/2015</code></pre>
 
-         <p>Multiple parameters can be sent as well:</p>
-         <code>http://oregonstateparks.org/data/index.cfm/parkEvents?parkId=103&dateTo=12/15/2015</code>
+         Multiple parameters can be sent as well:
+         <pre><code>http://oregonstateparks.org/data/index.cfm/parkEvents?parkId=103&dateTo=12/15/2015</code></pre>
 
-         <p>The default search will return all events beginning the day the request is made.</p>
+         The default search will return all events beginning the day the request is made.</p>
 
          <p>The HTTP request can be constructed in the same way as previous requests, once you have a constructed a string with the desired parameters:</p>
          <pre><code>var options = {
@@ -55,7 +56,7 @@
 };
          </code></pre>
 
-         <p>Result:</p>
+         <p>Format of JSON returned by request:</p>
          <pre><code>[         
   {
     "event_description": "Come join in for an early morning run on Thanksgiving day!",
@@ -70,14 +71,17 @@
     "title": "Turkey Trot"
    },
    …
-   // More Events
+   <span class="comment">// More Events</span>
 ]
          </code></pre>
 
       </section>
       <section id="footer">
          <a href="ParkFeatures.html" id="previous">Previous</a>
-         <a href="http://52.88.123.171:3000/home" id="next">Example</a>
+         <a href="Features.html" id="next">Features</a>
+      </section>
+      <section id="signature">
+        <p>Emily Snyder | CS 290 | 2015 | <a href="http://oregonstateparks.org">oregonstateparks.org</a></p>
       </section>
 	</body>
 </html>

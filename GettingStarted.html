@@ -14,28 +14,32 @@
 				<li><a href="ParkPhotos.html">Park Photos</a>
 				<li><a href="ParkFeatures.html">Park Features</a>
 				<li><a href="Events.html">Events</a>
+				<li><a href="Features.html">Features</a>
 				<li><a href="http://52.88.123.171:3000/home">Example</a>
-				<li><a href="http://oregonstateparks.org">oregonstateparks.org</a>
 			</ul>
 		</section>
 		<section id="text">
-			<h3>Getting Set Up</h3>
-			<p>No API Key is needed to use the Oregon State Parks API, the only requirements that anything used is credited to and presented as coming from OPRD. The one restriction given is that you cannot use the OPRD shied and wordmark without separate permission. Make sure to visit the site to read the terms and contact them with any questions <a href="http://oregonstateparks.org/index.cfm?do=v.page&id=52">Oregon State Parks</a>.</p>
+			<h3>Getting Started</h3>
+			<p>No API Key is needed to use the Oregon State Parks API, the only requirements that anything used is credited to and presented as coming from OPRD. The one restriction given is that you cannot use the OPRD shied and wordmark without separate permission. Make sure to visit the site to read the terms and contact them with any questions: <a href="http://oregonstateparks.org/index.cfm?do=v.page&id=52">Oregon State Parks</a>.</p>
 			<blockquote cite="http://oregonstateparks.org/index.cfm?do=v.page&id=52">"Artwork, photos, images and text (“data”) stored on oregonstateparks.org may be subject to copyright. All use of data from this website must be credited “courtesy Oregon Parks and Recreation Department,” and must be presented as originating from OPRD."</blockquote>
+			</br>
 			<p>Calls to this API are fairly straightforward and are all GET requests that return a JSON object as a string.</p>
 			<p>There are five ways to get data from the API:</p>
 			<ul>
-				<li><h4>Parks</h4>Returns a list of all Oregon State parks along with their latitude, longitude, narrative, name and id.</li> 
+				<li><h4>Parks</h4>Returns a list of all Oregon State parks along with their latitude, longitude, narrative, name and ID.</li> 
 				<li><h4>Park Photos</h4>Returns all photos for a specified park in both thumbnail and full size.</li>
-				<li><h4>Park Features</h4>Returns a list of parks and their features that can be searched based on the park id or name or the features class or title. When looking at <a href="http://oregonstateparks.org">OregonStateParks.org</a> these features show up as icons on the park’s page.</li>
-				<li><h4>Park Events</h4>Returns a list of events at parks that can be searched based on park, event category, event id, description, or date specifiers.</li>
+				<li><h4>Park Features</h4>Returns a list of parks and their features that can be searched based on the park ID or name or the features class or title. When looking at <a href="http://oregonstateparks.org">OregonStateParks.org</a> these features show up as icons on the park’s page.</li>
+				<li><h4>Park Events</h4>Returns a list of events at parks that can be searched based on park, event category, event ID, description, or date specifiers.</li>
 				<li><h4>Features</h4>Returns a list of all possible features and their classes.</li>
 			</ul>
 			<p>For example, if you visit the page for <a href="http://oregonstateparks.org/index.cfm?do=parkPage.dsp_parkPage&parkId=59">Alderwood State Wayside</a> this is where you can find the information available through the API.</p>
 			<img src="ParkDetails.PNG"/>
 		</section>
 		<section id="footer">
-			<a href="Parks.html" id="next">Next</a>
+			<a class="navigation" href="Parks.html" id="next">Next</a>
+		</section>
+		<section id="signature">
+			<p>Emily Snyder | CS 290 | 2015 | <a href="http://oregonstateparks.org">oregonstateparks.org</a></p>
 		</section>
 	</body>
 </html>

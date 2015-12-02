@@ -14,14 +14,16 @@
         <li><a href="ParkPhotos.html">Park Photos</a>
         <li><a href="ParkFeatures.html">Park Features</a>
         <li><a href="Events.html">Events</a>
+        <li><a href="Features.html">Features</a>
         <li><a href="http://52.88.123.171:3000/home">Example</a>
-        <li><a href="http://oregonstateparks.org">oregonstateparks.org</a>
       </ul>
     </section>
 		<section id="text">
       <h3>Parks</h3>
-			<p>The most general call that can be made to the Oregon State Parks API results in a list of all of the state parks in Oregon. The GET request is sent to:</p>
-			<code>http://oregonstateparks.org/data/index.cfm/parks</code>
+			<p>The most general call that can be made to the Oregon State Parks API results in a list of all of the state parks in Oregon. For each park, it provides the park lattitude, longitude, narrative, name and ID. The park narrative is simply the description that is displayed on the park's main page that describes the park and its attraction. The lattitude and longitude could be used, along with a map, to display the location of the park. For example, the <a href="https://developers.google.com/maps/web-services/overview">Google Maps API</a> accepts lattitude and longitude in requests for map data.</p>
+      <p>The GET request is sent to:</br>
+			<pre><code>http://oregonstateparks.org/data/index.cfm/parks</code></pre>
+      </p>
 			<p>If you are using node.js, you can set this up with an HTTP request. The data will be returned in chunks, so it is important to concatenate those before attempting to parse the JSON. Once you have the data stored as a JSON object, you can pull out the data you are interested in using.</p>
 			<pre><code>var options = {
   host: 'oregonstateparks.org',
@@ -34,13 +36,13 @@ callback = function(response) {
   });
   response.on('end', function() {
     var data = JSON.parse(string);
-    // Your code here
+    <span class="comment">// Your code here</span>
   });
 }
 http.request(options,callback).end();
 			</code></pre>
 
-			<p>Response:</p>
+			<p>Format of JSON returned by request:</p>
 			<pre><code>[ 
   { 
     "park_latitude":44.659645,
@@ -50,14 +52,17 @@ http.request(options,callback).end();
     "park_longitude":-124.056381 
   },
   …
-  // All parks will be in the response
+  <span class="comment">// All parks will be in included the response<span>
 ]
 			</code></pre>
-			<p>This is a good request to use if you want a list of park names and ids, since most of the other requests that can be used in the API can use this information to return more specific information. You cannot include any parameters in the GET request, so it will always return <em>all</em> of the parks.</p>
+			<p>This is a good request to use if you want a list of park names and ids, since most of the other requests that can be used in the API need these parameters to return information about specific parks. You cannot include any parameters in this GET request, so it will always return all Oregon State parks.</p>
 		</section>
     <section id="footer">
       <a href="ParkPhotos.html" id="next">Next</a>
       <a href="GettingStarted.html" id="previous">Previous</a>
+    </section>
+    <section id="signature">
+      <p>Emily Snyder | CS 290 | 2015 | <a href="http://oregonstateparks.org">oregonstateparks.org</a></p>
     </section>
 	</body>
 </html>
